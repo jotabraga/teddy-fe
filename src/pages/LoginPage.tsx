@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -12,21 +14,25 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4">
-      <h1 className="text-2xl font-bold">Bem-vindo!</h1>
-      <input
+    <div className="flex flex-col items-center justify-center w-full gap-y-[25px] h-screen bg-[#f5f5f5]">
+      <p className="font-sans text-[36px] font-normal leading-[43.57px] text-left decoration-skip-ink-none underline-offset-auto">
+        Olá, seja bem vindo!
+      </p>
+
+      <Input
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Digite seu nome"
-        className="px-4 py-2 border rounded"
+        className="w-[521px] h-[60px] rounded px-4 py-2 text-left placeholder:text-[24px] placeholder:font-normal placeholder:font-sans"
       />
-      <button
+
+      <Button
+        className="w-[521px] h-[60px] rounded bg-[#EC6724] text-white font-sans text-[24px] font-bold"
         onClick={handleSubmit}
-        className="px-4 py-2 bg-blue-500 text-white rounded"
       >
         Entrar
-      </button>
+      </Button>
     </div>
   );
 }
