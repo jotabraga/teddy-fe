@@ -24,11 +24,11 @@ function LoginPage() {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Digite seu nome"
-        className="w-full max-w-[90%] md:max-w-[521px] h-[60px] rounded px-4 py-2 text-left placeholder:text-[18px] md:placeholder:text-[24px] placeholder:font-normal placeholder:font-sans"
+        className="w-full max-w-[90%] md:max-w-[521px] h-[60px] rounded px-4 py-2 text-left text-[18px] md:text-[24px] font-normal font-sans placeholder:text-[18px] md:placeholder:text-[24px] placeholder:font-normal placeholder:font-sans"
       />
 
       <Button
-        className="w-full max-w-[90%] md:max-w-[521px] h-[60px] rounded bg-[#EC6724] text-white font-sans text-[20px] md:text-[24px] font-bold"
+        className="w-full max-w-[90%] md:max-w-[521px] h-[60px] rounded bg-[#EC6724] text-white font-sans text-[20px] md:text-[24px] font-bold hover:bg-[#a44819]"
         onClick={handleSubmit}
       >
         Entrar
