@@ -14,8 +14,8 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full gap-y-[25px] h-screen bg-[#f5f5f5]">
-      <p className="font-sans text-[36px] font-normal leading-[43.57px] text-left decoration-skip-ink-none underline-offset-auto">
+    <div className="flex flex-col items-center justify-center w-full gap-y-[15px] md:gap-y-[25px] h-screen bg-[#f5f5f5] px-4">
+      <p className="font-sans text-[24px] md:text-[36px] font-normal leading-[1.2] text-center">
         Olá, seja bem vindo!
       </p>
 
@@ -24,11 +24,11 @@ function LoginPage() {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Digite seu nome"
-        className="w-[521px] h-[60px] rounded px-4 py-2 text-left placeholder:text-[24px] placeholder:font-normal placeholder:font-sans"
+        className="w-full max-w-[90%] md:max-w-[521px] h-[60px] rounded px-4 py-2 text-left placeholder:text-[18px] md:placeholder:text-[24px] placeholder:font-normal placeholder:font-sans"
       />
 
       <Button
-        className="w-[521px] h-[60px] rounded bg-[#EC6724] text-white font-sans text-[24px] font-bold"
+        className="w-full max-w-[90%] md:max-w-[521px] h-[60px] rounded bg-[#EC6724] text-white font-sans text-[20px] md:text-[24px] font-bold"
         onClick={handleSubmit}
       >
         Entrar
