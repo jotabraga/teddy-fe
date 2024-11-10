@@ -1,66 +1,26 @@
 import { PaginationComponent } from "@/components/layout/pagination";
 import { Input } from "@/components/ui/input";
+import { api } from "@/hooks/useApi";
 import { Plus, Edit, Trash } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+interface Customer {
+  id: number;
+  name: string;
+  company: string;
+  salary: string;
+}
 
 function HomePage() {
-  const customers = [
-    {
-      id: 1,
-      name: "joao",
-      company: "teddy",
-      salary: "8000",
-    },
-    {
-      id: 1,
-      name: "joao",
-      company: "teddy",
-      salary: "8000",
-    },
-    {
-      id: 1,
-      name: "joao",
-      company: "teddy",
-      salary: "8000",
-    },
-    {
-      id: 1,
-      name: "joao",
-      company: "teddy",
-      salary: "8000",
-    },
-    {
-      id: 1,
-      name: "joao",
-      company: "teddy",
-      salary: "8000",
-    },
-    {
-      id: 1,
-      name: "joao",
-      company: "teddy",
-      salary: "8000",
-    },
-    {
-      id: 1,
-      name: "joao",
-      company: "teddy",
-      salary: "8000",
-    },
-    {
-      id: 1,
-      name: "joao",
-      company: "teddy",
-      salary: "8000",
-    },
-    {
-      id: 1,
-      name: "joao",
-      company: "teddy",
-      salary: "8000",
-    },
-  ];
+  const [customersPerPage, setCustomersPerPage] = useState(16);
   const [currentPage, setCurrentPage] = useState(1);
+  const [customers, setCustomers] = useState<Customer[]>([]);
+
+  useEffect(() => {
+    api.get("/customers").then((response) => {
+      return setCustomers(response.data || []);
+    });
+  }, []);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -90,21 +50,25 @@ function HomePage() {
       </div>
 
       <div className="grid grid-cols-4 gap-4 w-full mt-4">
-        {customers.map((customer) => (
-          <div
-            key={customer.id}
-            className="p-4 border border-gray-300 rounded shadow-md"
-          >
-            <h2 className="text-lg font-semibold">{customer.name}</h2>
-            <p>Empresa: {customer.company}</p>
-            <p>Salário: R${customer.salary}</p>
-            <div className="flex space-x-2 mt-2 justify-between">
-              <Plus className="w-5 h-5" />
-              <Edit className="w-5 h-5" />
-              <Trash className="w-5 h-5 text-[#EC6724]" />
+        {customers.length ? (
+          customers.map((customer) => (
+            <div
+              key={customer.id}
+              className="p-4 border border-gray-300 rounded shadow-md"
+            >
+              <h2 className="text-lg font-semibold">{customer.name}</h2>
+              <p>Empresa: {customer.company}</p>
+              <p>Salário: R${customer.salary}</p>
+              <div className="flex space-x-2 mt-2 justify-between">
+                <Plus className="w-5 h-5" />
+                <Edit className="w-5 h-5" />
+                <Trash className="w-5 h-5 text-[#EC6724]" />
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <></>
+        )}
       </div>
 
       <button className="w-full h-10 rounded border-2 border-[#EC6724]">

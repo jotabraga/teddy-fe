@@ -1,14 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { RootState } from "@/redux/store";
+import { setUser } from "@/redux/user/user";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  const [name, setName] = useState("");
+  const { user } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    if (name) {
+    if (user) {
       navigate("/home");
     }
   };
@@ -21,8 +25,8 @@ function LoginPage() {
 
       <Input
         type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        value={user}
+        onChange={(e) => dispatch(setUser(e.target.value))}
         placeholder="Digite seu nome"
         className="w-full max-w-[90%] md:max-w-[521px] h-[60px] rounded px-4 py-2 text-left text-[18px] md:text-[24px] font-normal font-sans placeholder:text-[18px] md:placeholder:text-[24px] placeholder:font-normal placeholder:font-sans"
       />
