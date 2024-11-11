@@ -8,7 +8,7 @@ export const store = configureStore({
   reducer: {
     user: userReducer,
     page: pageReducer,
-    customer: customerReducer,
+    selectedCustomers: customerReducer,
     viewOption: viewReducer,
   },
 });

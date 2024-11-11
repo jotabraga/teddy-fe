@@ -7,34 +7,29 @@ interface Customer {
   salary: string;
 }
 
-interface CustomersState {
-  selectedCustomers: Customer[];
+interface SelectedCustomersState {
+  customers: Customer[];
 }
 
-const initialState: CustomersState = {
-  selectedCustomers: [],
+const initialState: SelectedCustomersState = {
+  customers: [],
 };
 
-export const customersSlice = createSlice({
-  name: "customers",
+const selectedCustomersSlice = createSlice({
+  name: "selectedCustomers",
   initialState,
   reducers: {
-    addCustomer: (state, action: PayloadAction<Customer>) => {
+    toggleCustomerSelection: (state, action: PayloadAction<Customer>) => {
       const customer = action.payload;
-      const exists = state.selectedCustomers.some((c) => c.id === customer.id);
-      if (!exists) {
-        state.selectedCustomers.push(customer);
+      const index = state.customers.findIndex((c) => c.id === customer.id);
+      if (index >= 0) {
+        state.customers.splice(index, 1);
+      } else {
+        state.customers.push(customer);
       }
-    },
-    removeCustomer: (state, action: PayloadAction<number>) => {
-      const customerId = action.payload;
-      state.selectedCustomers = state.selectedCustomers.filter(
-        (c) => c.id !== customerId
-      );
     },
   },
 });
 
-export const { addCustomer, removeCustomer } = customersSlice.actions;
-
-export default customersSlice.reducer;
+export const { toggleCustomerSelection } = selectedCustomersSlice.actions;
+export default selectedCustomersSlice.reducer;
