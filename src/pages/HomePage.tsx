@@ -2,10 +2,11 @@ import CustomerCard from "@/components/layout/customerCard";
 import Modal from "@/components/layout/modal";
 import { PaginationComponent } from "@/components/layout/pagination";
 import { Input } from "@/components/ui/input";
+import { cleanCustomersSelection } from "@/redux/selectedCustomers/selectedCustomers";
 import { RootState } from "@/redux/store";
 import { createCustomer, getCustomers } from "@/services/customers";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 interface Customer {
   id: number;
@@ -27,6 +28,10 @@ function HomePage() {
   const [company, setCompany] = useState("");
   const [salary, setSalary] = useState("");
   const { viewOption } = useSelector((state: RootState) => state.viewOption);
+  const { selectedCustomers } = useSelector(
+    (state: RootState) => state.selectedCustomers
+  );
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getCustomers(currentPage, customersPerPage).then((response) => {
@@ -46,6 +51,10 @@ function HomePage() {
     setName("");
     setCompany("");
     setSalary("");
+  };
+
+  const handleCleanCustomersSelection = () => {
+    dispatch(cleanCustomersSelection());
   };
 
   const handleCreateCustomer = async () => {
@@ -72,7 +81,33 @@ function HomePage() {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
-  return (
+  return viewOption === "Clientes selecionados" ? (
+    <div className="flex flex-col items-center space-y-4 w-4/5 mx-auto">
+      <div className="grid grid-cols-4 gap-4 w-full mt-4">
+        {selectedCustomers.length ? (
+          selectedCustomers.map((customer) => (
+            <CustomerCard
+              key={customer.id}
+              customer={customer}
+              customers={customers}
+              setCustomers={setCustomers}
+              setCustomersCount={setCustomersCount}
+            />
+          ))
+        ) : (
+          <></>
+        )}
+      </div>
+      <button
+        onClick={handleCleanCustomersSelection}
+        className="w-full h-10 rounded border-2 border-[#EC6724]"
+      >
+        <p className="text-sm font-bold text-[#EC6724]">
+          Limpar clientes selecionados
+        </p>
+      </button>
+    </div>
+  ) : (
     <div className="flex flex-col items-center space-y-4 w-4/5 mx-auto">
       <div className="flex justify-between w-full">
         <h1 className="text-[18px] text-left">

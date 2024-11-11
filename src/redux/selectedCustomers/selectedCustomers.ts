@@ -8,11 +8,11 @@ interface Customer {
 }
 
 interface SelectedCustomersState {
-  customers: Customer[];
+  selectedCustomers: Customer[];
 }
 
 const initialState: SelectedCustomersState = {
-  customers: [],
+  selectedCustomers: [],
 };
 
 const selectedCustomersSlice = createSlice({
@@ -21,15 +21,21 @@ const selectedCustomersSlice = createSlice({
   reducers: {
     toggleCustomerSelection: (state, action: PayloadAction<Customer>) => {
       const customer = action.payload;
-      const index = state.customers.findIndex((c) => c.id === customer.id);
+      const index = state.selectedCustomers.findIndex(
+        (c) => c.id === customer.id
+      );
       if (index >= 0) {
-        state.customers.splice(index, 1);
+        state.selectedCustomers.splice(index, 1);
       } else {
-        state.customers.push(customer);
+        state.selectedCustomers.push(customer);
       }
+    },
+    cleanCustomersSelection: (state) => {
+      state.selectedCustomers = [];
     },
   },
 });
 
-export const { toggleCustomerSelection } = selectedCustomersSlice.actions;
+export const { toggleCustomerSelection, cleanCustomersSelection } =
+  selectedCustomersSlice.actions;
 export default selectedCustomersSlice.reducer;

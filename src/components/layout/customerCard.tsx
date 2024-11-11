@@ -28,7 +28,7 @@ const CustomerCard: React.FC<CustomerCardProps> = ({
 }) => {
   const dispatch = useDispatch();
   const selectedCustomers = useSelector(
-    (state: RootState) => state.selectedCustomers.customers
+    (state: RootState) => state.selectedCustomers.selectedCustomers
   );
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
