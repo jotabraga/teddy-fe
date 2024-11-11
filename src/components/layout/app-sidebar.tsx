@@ -1,3 +1,4 @@
+import Logo from "@/assets/logoTeddy.svg";
 import {
   Sidebar,
   SidebarContent,
@@ -8,9 +9,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import { Home, Users, Package } from "lucide-react";
 
-// Menu items.
 const items = [
   {
     title: "Home",
@@ -18,24 +18,14 @@ const items = [
     icon: Home,
   },
   {
-    title: "Inbox",
+    title: "Clientes",
     url: "#",
-    icon: Inbox,
+    icon: Users,
   },
   {
-    title: "Calendar",
+    title: "Produtos",
     url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
+    icon: Package,
   },
 ];
 
@@ -44,14 +34,19 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent>
+          <SidebarGroupLabel className="h-[100px] flex items-center justify-center">
+            <img src={Logo} alt="Logo da Empresa" className="w-24" />
+          </SidebarGroupLabel>
+          <SidebarGroupContent className="mt-6">
+            {" "}
             <SidebarMenu>
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.title} className="mb-3">
+                  {" "}
+                  {/* Espaço entre cada item */}
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
+                    <a href={item.url} className="flex items-center space-x-2">
+                      <item.icon className="w-5 h-5" />
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
