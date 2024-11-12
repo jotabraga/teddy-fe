@@ -21,17 +21,20 @@ function Header() {
 
   const { user } = useSelector((state: RootState) => state.user);
   return (
-    <header className="flex items-center justify-between p-4 bg-white text-black w-full h-[100px] shadow-md">
+    <header className="flex items-center justify-between p-4 bg-white text-black w-full h-auto sm:h-[100px] shadow-md">
       <div className="flex items-center space-x-4">
-        <SidebarTrigger />
+        <SidebarTrigger className="self-start" />
       </div>
-
-      <div className="flex items-center space-y-4 w-4/5 mx-auto">
-        <img src={Logo} alt="Logo da Empresa" className="w-24 h-auto" />
-        <div className="flex items-center gap-5 mx-auto">
+      <div className="flex flex-grow flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:w-4/5 sm:mx-auto sm:justify-between">
+        <img
+          src={Logo}
+          alt="Logo da Empresa"
+          className="hidden md:block w-16 sm:w-24 h-auto"
+        />
+        <div className="flex flex-col sm:flex-row items-center gap-5 mx-auto">
           <h1
             onClick={() => handleOptionClick("Clientes")}
-            className={`text-lg font-semibold cursor-pointer ${
+            className={`text-base sm:text-lg font-semibold cursor-pointer ${
               viewOption === "Clientes" ? "text-[#EC6724]" : ""
             }`}
           >
@@ -39,7 +42,7 @@ function Header() {
           </h1>
           <h1
             onClick={() => handleOptionClick("Clientes selecionados")}
-            className={`text-lg font-semibold cursor-pointer ${
+            className={`text-base sm:text-lg font-semibold cursor-pointer ${
               viewOption === "Clientes selecionados" ? "text-[#EC6724]" : ""
             }`}
           >
@@ -47,13 +50,12 @@ function Header() {
           </h1>
           <button
             onClick={() => handleExitClick()}
-            className="text-lg font-semibold"
+            className="text-base sm:text-lg font-semibold"
           >
             Sair
           </button>
         </div>
-
-        <h1 className="text-lg m-0">
+        <h1 className="hidden md:block text-base sm:text-lg m-0 text-center sm:text-right">
           Olá, <span className="font-semibold">{user}</span>
         </h1>
       </div>
