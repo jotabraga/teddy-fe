@@ -114,7 +114,7 @@ function HomePage() {
           <span className="font-semibold">{customersCount}</span> clientes
           encontrados:
         </h1>
-        <div className="text-[18px] flex items-center space-x-2">
+        <div className="text-[18px] items-center space-x-2 hidden md:flex">
           <h1>Clientes por página:</h1>
           <Input
             type="number"
@@ -127,7 +127,7 @@ function HomePage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-4 w-full mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full mt-4">
         {customers.length ? (
           customers.map((customer) => (
             <CustomerCard
