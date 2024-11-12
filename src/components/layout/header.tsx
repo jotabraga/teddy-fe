@@ -25,7 +25,7 @@ function Header() {
       <div className="flex items-center space-x-4">
         <SidebarTrigger className="self-start" />
       </div>
-      <div className="flex flex-grow flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:w-4/5 sm:mx-auto sm:justify-between">
+      <div className="flex flex-col sm:flex-row flex-grow sm:flex-grow-0 items-center space-y-4 sm:space-y-0 sm:w-4/5 sm:mx-auto sm:justify-between">
         <img
           src={Logo}
           alt="Logo da Empresa"
